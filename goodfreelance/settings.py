@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'e9fd9g898g98c9-sr-90-s-90(SD(S9f9(*f9df89890)))'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True # TODO: когда деплоить будешь False
+DEBUG = False
 
-ALLOWED_HOSTS = ['artiomnosov.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['artiomnosovithack.pythonanywhere.com', '127.0.0.1']
 
 
 # Application definition
