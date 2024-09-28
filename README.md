@@ -1,7 +1,6 @@
 <div align="center">
-<img width="30%" src="static\images\logo.avif">
 
-# Continue: GoodFreelance
+# Геймоваторы: loodsen game
 # [Ссылка на сайт (pythonenywhere)](http://artiomnosov.pythonanywhere.com/)
 </div>
 
@@ -9,13 +8,13 @@
 
 --> Клонируйте репозиторий данной командой :
 ```bash
-git clone https://github.com/ArtiomNosov/Opportunity-Cup-2023-IT
+git clone https://github.com/ArtiomNosov/Nuclear-IT-hack-2024-loodsen-game
 
 ```
 
 --> Перейдите в директорию с проектными файлами : 
 ```bash
-cd GF
+cd Nuclear-IT-hack-2024-loodsen-game
 
 ```
 
