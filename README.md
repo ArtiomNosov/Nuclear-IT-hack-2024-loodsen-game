@@ -1,7 +1,7 @@
 <div align="center">
 
 # Геймоваторы: loodsen game
-# [Ссылка на сайт]([http://artiomnosov.pythonanywhere.com/](https://artiomnosovithack.pythonanywhere.com/])
+# [Ссылка на сайт](https://artiomnosovithack.pythonanywhere.com/)
 </div>
 
 ### Клонируйте репозиторий
