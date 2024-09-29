@@ -812,7 +812,7 @@ a {
   max-width: 68rem;
 }
 
-/* Стили для кнопки "Пополнить баланс" */
+/* Стили для кнопки "Пополнить мешок" */
 .recharge-button {
   background-color: var(--color-main);
   color: white;

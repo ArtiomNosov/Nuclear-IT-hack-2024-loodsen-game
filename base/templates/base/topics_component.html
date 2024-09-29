@@ -1,7 +1,9 @@
 <div class="topics">
-    <div class="topics__header">
-        <h2>Поиск по темам</h2>
-    </div>
+    <a href="{% url 'topics' %}">
+        <div class="topics__header">
+                <h2>Поиск по квестам</h2> 
+        </div>
+    </a>
     <ul class="topics__list">
         <li>
             <a href="{% url 'home' %}" class="active">All <span>{{jobs.count}}</span></a>

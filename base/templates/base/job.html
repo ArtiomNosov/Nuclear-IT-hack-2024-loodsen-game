@@ -9,13 +9,13 @@
         <div class="job__topLeft">
           <a href="{% url 'home' %}">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-              <title>arrow-left</title>
+              <title>назад</title>
               <path
                 d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
               </path>
             </svg>
           </a>
-          <h3>Заказ</h3>
+          <h3>Квест</h3>
         </div>
         {% if job_customer == request.user %}
         <div class="job__topRight">
@@ -57,7 +57,7 @@
             <span>{{job.created|timesince}} назад</span>
           </div>
           <div class="job__hosted">
-            <p>Заказчик</p>
+            <p>Квест</p>
             <a href="{% url 'user-profile' job_customer.id %}" class="job__author">
               <div class="avatar avatar--small">
                 <img src="{{job_customer.avatar.url}}" />
@@ -116,10 +116,10 @@
         {% if request.user.is_authenticated %}
         <form action="" method="POST">
           {% csrf_token %}
-          <input name="body" placeholder="Напишите сообщение здесь..." />
+          <input name="body" placeholder="Напишите послание здесь..." />
         </form>
         {% else %}
-        <a href="{%  url 'login' %}">Вам нужно авторизоваться, чтобы написать сообщение</a>
+        <a href="{%  url 'login' %}">Вам нужно авторизоваться, чтобы написать послание</a>
         {% endif %}
       </div>
 

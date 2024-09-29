@@ -6,7 +6,15 @@ from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from .models import User, Topic, JobStatus, Job, MatchType, Match, ReviewType, Review, Message
 from .forms import JobForm, UserForm, MyUserCreationForm
+import re
 
+def get_user_context(user):
+    transactions = user.transaction_set.all()
+    balance = sum([x.amount if x.addition == 1 else -x.amount for x in transactions])
+    context = {
+        'balance': int(balance)
+    }
+    return context
 
 def loginPage(request):
     page = 'login'
@@ -20,7 +28,7 @@ def loginPage(request):
         try:
             user = User.objects.get(email=email)
         except:
-            messages.error(request, 'User does not exist')
+            messages.error(request, 'Пользователь не существует')
 
         user = authenticate(request, email=email, password=password)
 
@@ -28,7 +36,7 @@ def loginPage(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'Username OR password does not exit')
+            messages.error(request, 'Неправильный логин или пароль')
 
     context = {'page': page}
     return render(request, 'base/login_register.html', context)
@@ -92,7 +100,8 @@ def home(request):
                'job_count': job_count, 
                'job_messages': job_messages}
     
-
+    context.update(get_user_context(request.user))
+    print(context)
     return render(request, 'base/home.html', context)
 
 
@@ -123,6 +132,7 @@ def job(request, pk):
     context = {'job': job, 'job_messages': job_messages,
                'participants': participants,
                'job_customer': job_customer}
+    context.update(get_user_context(request.user))
     return render(request, 'base/job.html', context)
 
 
@@ -136,16 +146,27 @@ def userProfile(request, pk):
     job_to_customer = get_job_to_customer(jobs)
     context = {'user': user, 'job_to_customer': job_to_customer,
                'job_messages': job_messages, 'topics': topics}
+    context.update(get_user_context(request.user))
     return render(request, 'base/profile.html', context)
 
-def userBalance(request, pk): # TODO:
+def userBalance(request, pk):
     user = User.objects.get(id=pk)
     transactions = user.transaction_set.all()
     context = {
         'user': user,
-        'transactions': transactions
+        'transactions': transactions,
     }
+    context.update(get_user_context(request.user))
     return render(request, f'base/balance.html', context)
+
+
+def get_cost(str_cost):
+    arr = re.findall(r'\d+', str_cost)
+    if len(arr) > 1 and int(arr[1]) < 100:
+        return float(arr[0]) + float(arr[1]) * 0.01
+    elif len(arr) > 0:
+        return arr[0]
+    return 0
 
 
 @login_required(login_url='login')
@@ -161,7 +182,7 @@ def createJob(request):
             name=request.POST.get('name'),
             description=request.POST.get('description'),
             status = JobStatus.objects.get_or_create(name='Find performer')[0],
-            cost=request.POST.get('cost'),
+            cost=get_cost(request.POST.get('cost')),
         )
         job.save()
         match = Match.objects.create(
@@ -173,6 +194,7 @@ def createJob(request):
         return redirect('home')
 
     context = {'form': form, 'topics': topics}
+    context.update(get_user_context(request.user))
     return render(request, 'base/job_form.html', context)
 
 
@@ -192,12 +214,12 @@ def updateJob(request, pk):
         job.name = request.POST.get('name')
         job.topic = topic
         job.description = request.POST.get('description')
-        job.cost = request.POST.get('cost')
+        job.cost = get_cost(request.POST.get('cost'))
         job.save()
         return redirect('home')
 
     context = {'form': form, 'topics': topics, 'job': job}
-    
+    context.update(get_user_context(request.user))
     return render(request, 'base/job_form.html', context)
 
 def get_customer(job):
@@ -217,7 +239,8 @@ def deleteJob(request, pk):
         job.delete()
         return redirect('home')
     context = {'obj': job}
-    return render(request, 'base/delete.html', {})
+    context.update(get_user_context(request.user))
+    return render(request, 'base/delete.html', context)
 
 
 @login_required(login_url='login')
@@ -230,7 +253,10 @@ def deleteMessage(request, pk):
     if request.method == 'POST':
         message.delete()
         return redirect('home')
-    return render(request, 'base/delete.html', {'obj': message})
+    
+    context = {'obj': message}
+    context.update(get_user_context(request.user))
+    return render(request, 'base/delete.html', context)
 
 
 @login_required(login_url='login')
@@ -243,16 +269,21 @@ def updateUser(request):
         if form.is_valid():
             form.save()
             return redirect('user-profile', pk=user.id)
-
-    return render(request, 'base/update-user.html', {'form': form})
+    context = {'form': form}
+    context.update(get_user_context(request.user))
+    return render(request, 'base/update-user.html', context)
 
 
 def topicsPage(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     topics = Topic.objects.filter(name__icontains=q)
-    return render(request, 'base/topics.html', {'topics': topics})
+    context = {'topics': topics}
+    context.update(get_user_context(request.user))
+    return render(request, 'base/topics.html', context)
 
 
 def activityPage(request):
     job_messages = Message.objects.all()
-    return render(request, 'base/activity.html', {'job_messages': job_messages})
+    context = {'job_messages': job_messages}
+    context.update(get_user_context(request.user))
+    return render(request, 'base/activity.html', context)
