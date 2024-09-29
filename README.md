@@ -1,8 +1,11 @@
 <div align="center">
 
-# Геймоваторы: loodsen game
-# [Ссылка на сайт](https://artiomnosovithack.pythonanywhere.com/)
+# Команда "Геймоваторы": Носов Артём, Николаева Анна, Кузьмина Яна, Архангельский Александр
+# [Ссылка на сайт loodsen game](https://artiomnosovithack.pythonanywhere.com/)
+# Ссылка на презентацию TODO
 </div>
+
+### Инструкция по запуску решения
 
 ### Клонируйте репозиторий
 
