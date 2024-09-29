@@ -9,6 +9,8 @@ from .forms import JobForm, UserForm, MyUserCreationForm
 import re
 
 def get_user_context(user):
+    if not user.is_authenticated:
+        return {}
     transactions = user.transaction_set.all()
     balance = sum([x.amount if x.addition == 1 else -x.amount for x in transactions])
     context = {
@@ -101,7 +103,6 @@ def home(request):
                'job_messages': job_messages}
     
     context.update(get_user_context(request.user))
-    print(context)
     return render(request, 'base/home.html', context)
 
 
