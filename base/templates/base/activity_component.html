@@ -1,7 +1,9 @@
 <div class="activities">
-    <div class="activities__header">
-        <h2>Недавняя активность</h2>
-    </div>
+    <!-- <a href="{% url 'activity' %}"> -->
+        <div class="activities__header">
+            <h2>Недавние послания</h2>
+        </div>
+    <!-- </a> -->
     {% for message in job_messages %}
     <div class="activities__box">
         <div class="activities__boxHeader jobListJob__header">
@@ -30,7 +32,7 @@
 
         </div>
         <div class="activities__boxContent">
-            <div>Ответ на заказ: <a href="{% url 'job' message.job.id %}">“{{message.job.name}}”</a></div>
+            <div>Ответ на квест <a href="{% url 'job' message.job.id %}">“{{message.job.name}}”</a></div>
             <div class="activities__boxJobContent">{{message.body}}</div>
         </div>
     </div>

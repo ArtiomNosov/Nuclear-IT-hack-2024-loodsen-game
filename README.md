@@ -69,7 +69,7 @@ python manage.py runserver
 <td width="50%">
 <br>
 <p align="center">
-  Страница с заказом
+  Страница с квестом
 </p>
 <img src="static\images\job.png">  
 </td>

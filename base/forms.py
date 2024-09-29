@@ -17,7 +17,7 @@ class JobForm(ModelForm):
         fields = ['name', 'description', 'topic', 'cost']
         exclude = []
         widgets = {
-            'cost' : forms.TextInput(attrs = {'placeholder': '1000 руб'}),
+            'cost' : forms.TextInput(attrs = {'placeholder': '1000 золотых'}),
         }
         
 
