@@ -185,6 +185,7 @@ def createJob(request):
             status = JobStatus.objects.get_or_create(name='Find performer')[0],
             cost=get_cost(request.POST.get('cost')),
         )
+        
         job.save()
         match = Match.objects.create(
             job = job,

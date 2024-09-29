@@ -24,7 +24,7 @@
                 <div class="header__user__balance">
                     <a href="{% url 'user-balance' user.id %}"><span>Золото: {{balance}}</span></a>
                 </div>
-                <a href="{% url 'update-user' %}">
+                <a href="{% url 'user-profile' user.id %}">
                     <div class="avatar avatar--medium active">
                         <img src="{{request.user.avatar.url}}" />
                     </div>
