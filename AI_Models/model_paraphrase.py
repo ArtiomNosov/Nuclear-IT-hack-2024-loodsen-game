@@ -5,10 +5,10 @@ from langchain_community.chat_models.gigachat import GigaChat
 
 giga_token = API_connection.token(API_connection.auth_key)
 chat = GigaChat(credentials=API_connection.auth_key, scope ="GIGACHAT_API_PERS", verify_ssl_certs= False,model="GigaChat-Pro")
-with open('task.txt') as file:
+with open('model_paraphrase/task.txt') as file:
     content = file.read()
 messages = [SystemMessage(content = content)]
-with open('promt_paraphrase.txt') as file:
+with open('model_paraphrase/promt_paraphrase.txt') as file:
     prompt = file.read()
 def paraphrase(human_message):
     messages.append(HumanMessage(human_message))

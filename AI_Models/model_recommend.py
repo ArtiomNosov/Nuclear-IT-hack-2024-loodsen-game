@@ -1,13 +1,14 @@
 import API_connection
+import gigachat
 from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_community.chat_models.gigachat import GigaChat
 
 giga_token = API_connection.token(API_connection.auth_key)
 chat = GigaChat(credentials=API_connection.auth_key, scope ="GIGACHAT_API_PERS", verify_ssl_certs= False,model="GigaChat-Pro")
 
-with open('task1.txt') as file:
+with open('model_recommend/task1.txt') as file:
     content = file.read()
-with open('promt_recommend.txt') as file:
+with open('model_recommend/promt_recommend.txt') as file:
     prompt = file.read()
 
 messages = [SystemMessage(content = content)]
