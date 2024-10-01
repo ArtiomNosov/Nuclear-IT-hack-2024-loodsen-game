@@ -150,6 +150,7 @@ def userProfile(request, pk):
     context.update(get_user_context(request.user))
     return render(request, 'base/profile.html', context)
 
+@login_required(login_url='login')
 def userBalance(request, pk):
     user = User.objects.get(id=pk)
     transactions = user.transaction_set.all()
