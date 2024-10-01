@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="846b3909-93ce-4c0a-b884-acd9480df274" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Gigachat_models/API_connection.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gigachat_models/ans_paraphrase.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gigachat_models/ans_recommend.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gigachat_models/model_paraphrase.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gigachat_models/model_recommend.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gigachat_models/promt_paraphrase.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gigachat_models/promt_recommend.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gigachat_models/task.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gigachat_models/task1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {}
+}</component>
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: [
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOM31DB859LOjH&quot;,
+        &quot;number&quot;: 5
+      },
+      &quot;lastSeen&quot;: 1727735636793
+    },
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOM31DB859LTDg&quot;,
+        &quot;number&quot;: 6
+      },
+      &quot;lastSeen&quot;: 1727735637752
+    }
+  ]
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ArtiomNosov/Nuclear-IT-hack-2024-loodsen-game&quot;,
+    &quot;accountId&quot;: &quot;6c093cdb-4b52-46ae-a8dc-8890e44a91e9&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;ArtiomNosov&quot;,
+    &quot;repository&quot;: &quot;Nuclear-IT-hack-2024-loodsen-game&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2moALJFVTFFXhoC6cVjlHyfGZkO" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.model_recommend.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/yana/PycharmProjects/Nuclear-IT-hack-2024-loodsen-game",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-0e3be3396995-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23339.19" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="846b3909-93ce-4c0a-b884-acd9480df274" name="Changes" comment="" />
+      <created>1727732497373</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727732497373</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Добавлены зависимости в req.txt, добавлены модели">
+      <option name="closed" value="true" />
+      <created>1727732877720</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1727732877720</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="dac0cc2d-d2bb-4e10-b367-4a574096322c" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="dac0cc2d-d2bb-4e10-b367-4a574096322c">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="range">
+                    <value>
+                      <list>
+                        <option value="origin/HACK_51-101-102..origin/main" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Добавлены зависимости в req.txt, добавлены модели" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлены зависимости в req.txt, добавлены модели" />
+  </component>
+</project>
