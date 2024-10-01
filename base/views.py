@@ -289,3 +289,12 @@ def activityPage(request):
     context = {'job_messages': job_messages}
     context.update(get_user_context(request.user))
     return render(request, 'base/activity.html', context)
+
+@login_required(login_url='login')
+def shopPage(request):
+    products = Product.objects.all()
+    context = {
+        'products': products,
+    }
+    context.update(get_user_context(request.user))
+    return render(request, f'base/shop.html', context)
