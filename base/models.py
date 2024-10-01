@@ -100,7 +100,8 @@ class Message(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
-    amount = models.DecimalField(max_digits=20, decimal_places=2, null=False, default=0)
+    cost = models.DecimalField(max_digits=20, decimal_places=2, null=False)
+    amount = models.DecimalField(max_digits=20, decimal_places=2, null=False)
     art = models.CharField(max_digits=200, null=True)
     
     def __str__(self):
