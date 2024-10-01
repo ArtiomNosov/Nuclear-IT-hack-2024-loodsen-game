@@ -97,3 +97,11 @@ class Message(models.Model):
 
     def __str__(self):
         return self.body[0:50]
+
+class Product(models.Model):
+    name = models.CharField(max_length=200, null=True)
+    amount = models.DecimalField(max_digits=20, decimal_places=2, null=False, default=0)
+    art = models.CharField(max_digits=200, null=True)
+    
+    def __str__(self):
+        return self.name
