@@ -1,0 +1,55 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<main class="user__balance">
+    <div class="container">
+      <div class="balance__box">
+        <div class="balance__boxHeader">
+          <div class="balance__boxTitle">
+            <a href="{{request.META.HTTP_REFERER}}">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                <title>назад</title>
+                <path
+                  d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
+                </path>
+              </svg>
+            </a>
+            <h3>Мешок золота</h3>
+          </div>
+          <!--<button class="recharge-button">Пополнить мешок</button>-->
+        </div>
+        <div class="balance__body">
+          <form class="balance__view" action="" method="POST">
+            {% csrf_token %}
+            <label for="job_topic">У вас в мешке: {{balance}} золотых</label>
+          </form>
+          <table class="transaction-table">
+            <thead>
+              <tr>
+                <th>Дата</th>
+                <th>Действие</th>
+                <th>Сумма</th>
+                <th>Источник</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for transaction in transactions %}
+              <tr>
+                <td>{{transaction.created}}</td>
+                {% if transaction.addition == 1 %}
+                <td>Пополнение</td>
+                {% else %}
+                <td>Расход</td>
+                {% endif %}
+                <td>{{transaction.amount}} золотых</td>
+                <td>{{transaction.name}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+{% endblock content %}
