@@ -52,8 +52,8 @@ body {
   min-height: 100vh;
 }
 
-img {
-  width: 100%;
+img{
+  width:100%;
 }
 
 a {
@@ -63,6 +63,11 @@ a {
 }
 
 /*========== components ==========*/
+.hoodie{
+  width: 40;
+  height:100;
+}
+
 .container {
   max-width: 120rem;
   width: 90%;
