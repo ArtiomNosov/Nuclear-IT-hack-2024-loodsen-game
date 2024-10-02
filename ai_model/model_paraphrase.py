@@ -1,4 +1,4 @@
-import API_connection
+import api_connection
 import gigachat
 from langchain_core.messages import SystemMessage, HumanMessage
 from langchain_community.chat_models.gigachat import GigaChat
