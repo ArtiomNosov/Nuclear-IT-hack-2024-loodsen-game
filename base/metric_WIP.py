@@ -31,6 +31,23 @@ cursor.execute('''
 );
 ''')
 
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS Courses (
+        id INTEGER PRIMARY KEY,
+        name_of_course VARCHAR(16) NOT NULL,
+        content text NOT NULL,
+        frequency_of_use FLOAT,
+        is_for_all BOOLEAN
+);
+''')
+
+cursor.execute('''
+        CREATE TABLE IF NOT EXISTS CoursesEmployee (
+            empl_id INTEGER PRIMARY KEY,
+            course_id INTEGER PRIMARY KEY,    
+    );
+    ''')
+
 # Request for counting tasks with the status "In Progress"
 cursor.execute('''
     SELECT COUNT(*) 
