@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Product',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.DecimalField(decimal_places=2, max_digits=200, primary_key=True)),
                 ('name', models.CharField(max_length=200, null=True)),
                 ('cost', models.DecimalField(decimal_places=2, max_digits=20)),
                 ('amount', models.DecimalField(decimal_places=2, max_digits=20)),

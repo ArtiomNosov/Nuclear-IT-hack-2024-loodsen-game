@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-
+{% load static %}
 {% block content %}
 <main class="user__shop">
     <div class="container">
@@ -20,55 +20,19 @@
             <div class="card">
                 <div class="card__header">
                     <h4>{{ product.name }}</h4>
-                </div>
-                <div class="card__body">
-                    <p>Цена: {{ product.price }} золотых</p>
-                    <form action="{% url 'purchase' product.id %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" class="purchase-button">Купить</button>
-                    </form>
+                    <p>{{  product.description  }}</p>
                 </div>
             </div>
-            {% endfor %}
+            <div class="card__body">
+                <p>{{  product.art  }}</p>
+                <p>{{  product.amount  }}</p>
+                <p>Цена: {{ product.cost }} золотых</p>
+            </div>
         </div>
+            {% endfor %}
+            <img src="{% static 'images/hoodie.jpg' %}"/>
     </div>
 </main>
 
-<style>
-    .shop__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-    .shop__title {
-        font-size: 1.5rem;
-    }
-    .shop__cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 20px;
-    }
-    .card {
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 16px;
-        text-align: center;
-    }
-    .purchase-button {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-    .purchase-button:hover {
-        background-color: #45a049;
-    }
-    .back-button {
-        text-decoration: none;
-        color: #333;
-    }
-</style>
+
 {% endblock content %}
