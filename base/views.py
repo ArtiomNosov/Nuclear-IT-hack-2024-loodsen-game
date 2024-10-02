@@ -290,3 +290,153 @@ def activityPage(request):
     context = {'job_messages': job_messages}
     context.update(get_user_context(request.user))
     return render(request, 'base/activity.html', context)
+
+# jira super loader
+
+import os
+import requests
+import sys
+# https://docs.google.com/spreadsheets/d/1KfqpJ0u4K9htCjQTiZC4V6tzLwZQCCoa9XLBIQCMk7c/edit?usp=sharing
+def getGoogleSeet(spreadsheet_id, outDir, outFile):
+  
+  url = f'https://docs.google.com/spreadsheets/d/{spreadsheet_id}/export?format=csv'
+  response = requests.get(url)
+  if response.status_code == 200:
+    filepath = os.path.join(outDir, outFile)
+    with open(filepath, 'wb') as f:
+      f.write(response.content)
+      print('CSV file saved to: {}'.format(filepath))    
+  else:
+    print(f'Error downloading Google Sheet: {response.status_code}')
+    sys.exit(1)
+
+
+##############################################
+import pandas as pd
+import re
+import numpy as np
+
+import requests
+import base64
+import uuid
+
+sber_id = "08b96aae-68dc-4180-9cfe-86e7e3a36bd0"
+
+sber_secret = "2df7ab68-b4ba-42a8-91e8-f8cf86057f49"
+
+auth_key = "MDhiOTZhYWUtNjhkYy00MTgwLTljZmUtODZlN2UzYTM2YmQwOjJkZjdhYjY4LWI0YmEtNDJhOC05MWU4LWY4Y2Y4NjA1N2Y0OQ=="
+
+
+url = "https://ngw.devices.sberbank.ru:9443/api/v2/oauth"
+
+def token(auth,scope ='GIGACHAT_API_PERS'):
+
+    rq_uid = str(uuid.uuid4())
+
+    payload={
+    'scope': scope
+    }
+    headers = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Accept': 'application/json',
+    'RqUID': rq_uid,
+    'Authorization': f"Basic {auth}"
+    }
+    response = requests.request("POST", url, headers=headers, data=payload,verify=False)
+    return response
+import gigachat
+from langchain_core.messages import SystemMessage, HumanMessage
+from langchain_community.chat_models.gigachat import GigaChat
+
+giga_token = token(auth_key)
+chat = GigaChat(credentials=auth_key, scope ="GIGACHAT_API_PERS", verify_ssl_certs=False,model="GigaChat")
+
+def paraphrase(human_message):
+    messages = [SystemMessage(content = '''
+Ты - писатель фэнтези.
+Твоя главная цель - придумать название для задачи пользователя и переписать текст этой задачи в стиле фэнтези, и озаглавить описание задачи названием.
+Требования к ответу:
+-Все слова в сгенерированном ответе близки к жанру фэнтези.
+-Сгенерированное описание задачи составляет не более 100 символов.
+-В сгенерированном описании присутсвуют все ключевые слова из запроса, а так же все имена из запроса без изменений формы.
+-В начале описания ты обращаешься к пользователю словами "Путник" или "Герой" или "Принцесса" или "Рыцарь" или другими персонажами из фэнтези.
+-Все глаголы в сгенерированном описании второго лица
+-Общий стиль сгенерированного описания близок к фэнтези.
+-Ты используешь повелительное наклонение.
+-Ты сгенерировал название.
+-Ты ответил в формате "Название задачи. Описание задачи".
+Убедись, что в твоем ответе присутствет название, которое ты сгенерировал для задания.
+Не забудь отправить ответ в формате "Название задачи. Описание задачи". Убедись, что ты озаглавил описание задачи сгенерированным названием на основе запроса пользователя
+
+'''
+                              )]
+    messages.append(HumanMessage(human_message))
+    res = chat.invoke(messages)
+    messages.append(res)
+    print(res.content)
+    return res.content
+
+import time
+
+@login_required(login_url='login')
+def updateJira(request):
+    outDir = 'tmp/'
+
+    os.makedirs(outDir, exist_ok = True)
+    filepath = getGoogleSeet('1KfqpJ0u4K9htCjQTiZC4V6tzLwZQCCoa9XLBIQCMk7c', outDir, "jira.csv")
+
+    jira_df = pd.read_csv('tmp/jira.csv')
+    jira_df
+    print(jira_df)
+
+    task_df = jira_df[jira_df['Тип задачи'] != 'Эпик']
+    task_df
+
+    epic_df = jira_df[jira_df['Тип задачи'] == 'Эпик'][['Ключ', 'Резюме']]
+    epic_df.columns = ['Ключ эпика', 'Резюме эпика']
+    epic_df
+
+    # task_df = task_df.merge(epic_df, left_on='parent', right_on='Ключ эпика')
+    # task_df
+
+    base_job = pd.DataFrame()
+    base_job['id'] = task_df['Ключ'].transform(lambda x: re.findall(r'\d+', x)[0])
+    base_job['id']
+
+    base_job['name'] = task_df['Резюме']
+    base_job['name']
+    print(1)
+    for i in range(base_job['name'].size):
+        res = paraphrase(base_job['name'][i])
+
+        base_job['name'][i] = res
+    print(2) 
+    print(task_df)
+
+    base_job['description'] = task_df['Описание']
+    base_job['description']
+
+    base_job['cost'] = task_df['Story point estimate'].transform(lambda x: 0 if np.isnan(x) else x*1000)
+    base_job['cost']
+
+    base_job['created'] = pd.to_datetime(task_df['Создано'], format='%d.%m.%Y %H:%M:%S').dt.strftime('%Y-%m-%d %H:%M:%S.000000')
+    base_job['created']
+
+    for i in range(task_df.shape[0]):
+        print('job!')
+        job = Job.objects.create(
+                # id=base_job['id'][i], 
+                topic=Topic.objects.get_or_create(name='test')[0], # task_df['Резюме эпика'][i])[0],
+                name=base_job['name'][i],
+                description=base_job['description'][i],
+                status = JobStatus.objects.get_or_create(name='Find performer')[0],
+                cost=base_job['cost'][i],
+            )
+        match = Match.objects.create(
+            job = job,
+            user = request.user,
+            type = MatchType.objects.get_or_create(name='Customer')[0],
+        )
+        match.save()
+        job.save()
+    return redirect('home')
